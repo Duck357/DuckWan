@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 获取文章发布码
     $code = $_POST['code'];
     
-    if($code === "IDUCK667788"){
+    if($code === "114514"){
         // 获取文章名称
         $name = $_POST['name'];
         
