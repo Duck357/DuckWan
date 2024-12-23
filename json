@@ -7,7 +7,9 @@
         "text": "本项目是我使用PHP、HTML5等构建的，由于本人语言问题，本项目在本人深思熟虑下准备开源。\n本專案是我使用PHP、HTML5等建構的，由於本人語言問題，本專案在本人深思熟慮下準備開源。\nこのプロジェクトは私が PHP、HTML5 などを使用して構築しました。私の言語の問題のため、このプロジェクトは慎重に検討した結果、オープンソースとして準備されました。\nThis project was built by me using PHP, HTML5, etc. Due to my language issues, this project was prepared to be open source after my careful consideration.\n\n希望这份源码可以帮助到一些人。\nHope this codes can help some people.",
         "info": "请阅读我  ReadMe",
         "read": 357,
-        "id": 1
+        "id": 1,
+        "uid": -1,
+        "per" : 0
     },
     "sum": 1
 }
