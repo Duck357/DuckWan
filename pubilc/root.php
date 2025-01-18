@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zn-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,7 +60,7 @@ $showForm = false;
 if(isset($_SESSION['loggedin'])){
     if($_SESSION['root'] == 0){
         $showForm =true;
-        $data = json_decode(file_get_contents('json'),true);
+        $data = json_decode(file_get_contents('../json'),true);
     }else{
         $showForm = false;
     }

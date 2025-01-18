@@ -3,7 +3,7 @@
 session_start();
 if(isset($_SESSION['loggedin'])){
 if($_SESSION['root'] == 0){
-    $data = json_decode(file_get_contents('./text'),true);
+    $data = json_decode(file_get_contents('../text'),true);
     $id = $_POST['id'];
     
     // 检查是否有数据被提交
@@ -30,7 +30,7 @@ if($_SESSION['root'] == 0){
 
         // 输出结果
         echo "状态: " . htmlspecialchars($error) . "<br>";
-        file_put_contents('./text',json_encode($newData, JSON_UNESCAPED_UNICODE));
+        file_put_contents('../text',json_encode($newData, JSON_UNESCAPED_UNICODE));
         header('Location: root.php');
         exit();
     }

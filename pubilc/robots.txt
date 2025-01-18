@@ -38,9 +38,17 @@ User-agent: yahoo-blogs/v3.9
 Disallow: 
 User-agent: *
 Disallow: 
-Disallow: /json
-Disallow: /file/
 Disallow: /login/code.txt
+Disallow: /root.php
+Disallow: /edit.php
+Disallow: /newtext.php
+Disallow: /delta.php
+Disallow: /deltat.php
+Disallow: /read/gt.php
+Disallow: /read/newcom.php
+Disallow: /add/get.php
+Disallow: /image/
+Disallow: /web/
 Allow: /ads.txt
 Allow: /index.php
 Allow: /add/index.php

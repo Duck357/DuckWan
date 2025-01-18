@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://duckwan.link/image/icon.ico" />
     <title>用户中心</title>
     <style>
         body {
@@ -119,10 +120,10 @@
             $a = "捐赠者";
         }
     }else{
-        $servername = "";
-        $username = "";
-        $password = "";
-        $dbname = "";
+        $servername = "localhost";
+        $username = "111";
+        $password = "111";
+        $dbname = "111";
         
         // 创建连接
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -211,7 +212,7 @@
                     <p>这里是文章管理的内容。</p>
                     <?php
                     echo "<div class='pages'>";
-                    foreach (json_decode(file_get_contents('../json'),true) as $page){
+                    foreach (json_decode(file_get_contents('../../json'),true) as $page){
                         if(isset($page['uid'])){
                             if($page['uid'] == $_SESSION['id']){
                                 echo '<div class="page">

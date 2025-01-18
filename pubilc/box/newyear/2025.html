@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青春是张单程票 张鑫栎</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* 深蓝渐变背景 */
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.5em;
+            line-height: 1.4;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 1s ease;
+            margin: 20px 0;
+        }
+
+        section img {
+            width: 100%;
+            max-width: 500px; /* Maximum width to prevent images from getting too large */
+            border-radius: 10px;
+            transition: all 1s ease;
+            margin-top: 20px;
+        }
+
+        section p {
+            font-size: 1.2em;
+            text-align: center;
+            margin: 20px 0;
+            transition: all 1s ease;
+            line-height: 1.5;
+        }
+
+        /* Styling for mobile devices */
+        @media (max-width: 768px) {
+            section p {
+                font-size: 1em;
+            }
+
+            section img {
+                width: 80%;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
+        }
+
+        /* Slide in effects */
+        section.left {
+            transform: translateX(-100%);
+        }
+
+        section.right {
+            transform: translateX(100%);
+        }
+
+        section.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <h1>青春是张单程票 —— 张鑫栎</h1>
+    <section class="right">
+        <p>那是在一个平凡的盛夏,我迈出幼儿,向成长进发。走进了这个朴实无华的校园,坐上了这趟——去不回的列车。</p>
+        <img src="https://image.linrol.cn/i/2024/12/31/10hhnfs.jpg" alt="图片1">
+    </section>
+    <section class="left">
+        <p>在这趟列车中,我收获了很多,第一节课，第一次回答，第一次写作业，无数的第一次</p>
+        <img src="https://image.linrol.cn/i/2024/12/31/10jtro9.jpeg" alt="图片2">
+    </section>
+    <section class="left">
+        <p>岁月居,时光倏忽而过,时间如流,眨眼间别过万水千山地,冬上转眼,六年而过这座平凡的学校,必将在我的青春中留下浓墨重彩的一笔</p>
+        <img src="https://image.linrol.cn/i/2024/12/31/10mz91o.jpg" alt="图片3">
+    </section>
+    <section class="right">
+        <p>望着缓向海平面下沉的落日,我禁感慨到:“青春就像这落日一样,无比灿烂那么短暂,那么珍贵。”</p>
+
+        <p>“蝶欲栖花花不依，百丛管过悲流离。”</p>
+        <img src="https://image.linrol.cn/i/2024/12/31/12cbwjr.jpeg" alt="图片3">
+    </section>
+
+    <h1>“莫愁前路无知己，天下谁人不识君。”</h1>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+
+        function revealOnScroll() {
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0) {
+                    section.classList.add('show');
+                    // 奇数编号从左侧进入，偶数编号从右侧进入
+                    if (index % 2 === 0) {
+                        section.classList.add('left');
+                    } else {
+                        section.classList.add('right');
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 session_start();
 if(isset($_SESSION['loggedin'])){
 if($_SESSION['root'] == 0){
-    $data = json_decode(file_get_contents('./json'),true);
+    $data = json_decode(file_get_contents('../json'),true);
     $id = $_POST['id'];
     function deleteDirectory($dirPath) {
     if (!is_dir($dirPath)) {
@@ -30,8 +30,8 @@ if($_SESSION['root'] == 0){
         // 删除指定ID的元素
         unset($data[$id]);
         
-        if(file_exists('file/'.$id.'/')){
-            deleteDirectory('file/'.$id.'/');
+        if(file_exists('../file/'.$id.'/')){
+            deleteDirectory('../file/'.$id.'/');
         }
 
         // 重新构建数组，确保键名是连续的
@@ -44,8 +44,8 @@ if($_SESSION['root'] == 0){
             if ($i > $id) {
                 $newData[$i - 1] = $data[$i];
                 $newData[$i - 1]['id'] = $data[$i]['id']-1;
-                if(file_exists('file/'.$i.'/')){
-                    rename('file/'.$i.'/', 'file/'.($i-1).'/');
+                if(file_exists('../file/'.$i.'/')){
+                    rename('../file/'.$i.'/', '../file/'.($i-1).'/');
                 }
             } else {
                 $newData[$i] = $data[$i];
@@ -55,7 +55,7 @@ if($_SESSION['root'] == 0){
 
         // 输出结果
         echo "状态: " . htmlspecialchars($error) . "<br>";
-        file_put_contents('./json',json_encode($newData, JSON_UNESCAPED_UNICODE));
+        file_put_contents('../json',json_encode($newData, JSON_UNESCAPED_UNICODE));
         header('Location: root.php');
         exit();
     }

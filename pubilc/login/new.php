@@ -19,10 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "密码: " . htmlspecialchars($upassword) . "<br>";
     
     // 数据库配置信息
-    $servername = ""; // 数据库服务器地址
-    $username = ""; // 数据库用户名
-    $password = ""; // 数据库密码
-    $dbname = ""; // 数据库名称
+    $servername = "localhost"; // 数据库服务器地址
+    $username = "111"; // 数据库用户名
+    $password = "111"; // 数据库密码
+    $dbname = "111"; // 数据库名称
     
     // 创建连接
     $conn = new mysqli($servername, $username, $password, $dbname);

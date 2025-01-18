@@ -1,144 +1,7 @@
 <?php
 session_start();
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../image/icon.ico" />
-    <title>用户主页</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: rgb(0, 145, 255);
-            display: -webkit-flex;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            moz-user-select: -moz-none; 
-            -moz-user-select: none; 
-            -o-user-select:none; 
-            -khtml-user-select:none; 
-            -webkit-user-select:none; 
-            -ms-user-select:none; 
-            user-select:none;
-        }
-        .body-container {
-            display: -webkit-flex;
-            display: flex;
-            width: 100%;
-        }
-        .article-list {
-            display: -webkit-flex;
-            display: flex;
-            flex-direction: column;
-            width: 60vw;
-        }
-        .article {
-            margin-top: 25px;
-            padding: 10px;
-        }
-        article-list h2, h3, p {
-            margin-bottom: 5px;
-            overflow-x:auto;
-            overflow-y: auto;
-        }
-        article-list h2 {
-            font-size: 30px;
-        }
-        .list {
-            margin-left: 2.5vw;
-            margin-top: 25px;
-            width: 30vw;
-            height: 85vh;
-            overflow-y: auto;
-        }
-        .ad {
-            backdrop-filter: blur(1vh);
-            background-color: rgba(234, 255, 255, 0.579);
-            margin-left: 2.5vw;
-            margin-top: 25px;
-            width: 30vw;
-            height: 30vw;
-            padding: 10px;
-            border-radius: 1vh;
-            overflow-y: auto;
-            transition: all 0.3s ease;
-            background-image: URL('file/img1.jpg');
-            background-size: 30vw 30vw;
-        }
-        .ad:hover{
-            box-shadow: 1vh 1vh 1vh black;
-            background-color: rgba(234, 255, 255, 0.136);
-        }
-        .li {
-            font-size: 20px;
-        }
-        .qh {
-          margin-top: 20px;
-          margin-bottom: 20px;
-          width: 60vw;
-          height: 50px;
-          flex-wrap: wrap;
-          justify-content: space-around;
-          display: flex;
-        }
-        .qh input{
-            height: 40px;
-            width: 20vw;
-            font-size: 30px;
-        }
-        .pages {
-            min-height: 300px;
-            width: 100vw;
-            margin: 30px;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column-reverse;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            overflow-y: auto;
-        }
-        .page {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            background-color: #6495ED;
-            width: 50%;
-            height: 100px;
-            border-radius: 6px;
-            margin-top: 20px;
-            color: aliceblue;
-            overflow-y: auto;
-        }
-        .page h1 , .page h2{
-            overflow-x: auto;
-            width: 250px;
-            height: 30px;
-            margin: 2px;
-        }
-    </style>
-	<link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
-    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
-</head>
-
-<?php
-$servername = "localhost";
-$username = "";
-$password = "";
-$dbname = "";
-
-// 创建连接
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// 检查连接
-if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
-}
+include("../../db/db.php");
 
 // 使用预处理语句
 $uid = $conn->real_escape_string($_GET['id']);
@@ -172,83 +35,271 @@ $stmt->bind_param("i", $uid); // "i" 表示一个整数类型的参数
 // 关闭连接
 $conn->close();
 ?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../image/icon.ico" />
+    <title><?php echo $uuu['name']." - DuckWan用户"; ?></title>
+    <?php
+    echo '<meta name="description" content="'.$uuu['info'].'">';
+    ?>
+    <style>
+        /* 禁止页面左右滑动 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+        }
+
+        header nav ul li {
+            display: inline-block;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Profile Section */
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 5px; /* 让个人简介与主内容有一定间距 */
+        }
+
+        .profile .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: <?php echo $uuu['color']; ?>;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: #333;
+        }
+
+        .profile h2 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .profile p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        /* 保证每篇文章的宽度固定 */
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;  /* 保证卡片宽度不变化 */
+            width: 80vw; /* 控制最大宽度 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card a{
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .card a:hover{
+            text-decoration: underline;
+        }
+        
+        /* 确保内容区不会无限扩展 */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: auto;
+            margin-top: 40px;
+        }
+
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h1 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        
+        /* Load More Button */
+        .load-more {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .load-more:hover {
+            background-color: #0056b3;
+        }
+
+        .load-more:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
 
 <body>
-    <mdui-card variant = "outlined" style="width: 90vw;height: 80px;display:flex;flex-direction:row-reverse;align-items:center;justify-content:center;">
-        <div style="display:flex;flex-direction:row-reverse;margin-right:70px">
-        <?php
-        if(isset($_SESSION['loggedin'])){
-            echo '<mdui-dropdown><mdui-button slot="trigger" variant="text" style="width: 60px;height: 60px;"><div style="font-size: 50px;background-color: '.$_SESSION['color'].';width: 60px;height: 60px;border-radius: 4px;text-align: center;color: #000000;">' . $_SESSION['img'] . '</div></mdui-button>
-              <mdui-menu>
-                <mdui-menu-item href="https://duckwan.link/login/">用户中心</mdui-menu-item>
-                <mdui-menu-item href="https://duckwan.link/login/logout.php">退出登录</mdui-menu-item>
-              </mdui-menu>
-            </mdui-dropdown><h2>'.$_SESSION['username'].'</h2>';
-        }else{
-            echo '<mdui-button href="/login/" style="margin-right:70px;margin-left:70px">登录</mdui-button>';
-        }
-        ?>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">DuckWan</div>
+        <nav>
+            <ul>
+                <li><a href="https://DuckWan.link/">首页</a></li>
+                <li><a href="/add/">发布帖子</a></li>
+                <li><a href="/box/">公告</a></li>
+                <?php
+                if(isset($_SESSION['loggedin'])){
+                    echo '<li><a href="/login/">'.$_SESSION['username'].'</a></li><li><a href="/login/logout.php">退出登录</a></li>';
+                }else{
+                    echo '<li><a href="/login/">登录</a></li>';
+                }
+                ?>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <!-- Profile Section -->
+        <div class="profile">
+            <div class="avatar">
+                <?php
+                echo $uuu['image']."</div><h2>".$a . '-' . $uuu['name']."</h2><p>".$uuu['info']."</p>";
+                ?>
         </div>
-        <mdui-button id="ggb" style="margin-right:70px">公告</mdui-button>
-        <mdui-button variant="elevated" style="margin-right:70px" href="https://duckwan.link/add/">发布文章</mdui-button>
-        <mdui-button variant="elevated" style="margin-right:70px" href="https://duckwan.link/">首页</mdui-button>
+        <div class="content" id="content">
+            <!-- 文章内容会动态加载在这里 -->
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading" id="loading"></div>
         
-        
-            <mdui-dialog class="example-dialog" close-on-overlay-click>
-                <mdui-list>
-                  <mdui-collapse accordion>
-                    <?php
-                        $data = json_decode(file_get_contents('../text'),true);
-                        foreach (array_reverse($data) as $key => $value){
-                            if ($key !== 'n') {
-                                echo '<mdui-collapse-item><mdui-list-item slot="header">'.$value['info'].' - '.$value['time'].'</mdui-list-item><div style="margin-left: 2.5rem"><mdui-list-item>'.
-                                nl2br('<h1 class="anh1"><strong>'.$value['info'].'</strong></h1>'.'<h2 class="anh2">发布人：'.$value['name'].'</h2><h3 class="anh2">发布时间：'.$value['time'].'</h3>'.'<p class="anp">'.$value['text'].'</p>')
-                                .'</mdui-list-item></div></mdui-collapse-item>';
-                            }
-                        }
-                    ?>
-                    
-                  </mdui-collapse>
-                </mdui-list>
-          <mdui-button>关闭</mdui-button>
-        </mdui-dialog>
-        
-        
-        <script>
-            function openlink(a) {
-                window.location.href = `https://duckwan.link/read?id=${a}`; // 使用模板字符串构建URL
-            }
-        
-          const dialog = document.querySelector(".example-dialog");
-          const openButton = document.getElementById('ggb');
-          const closeButton = dialog.querySelector("mdui-button");
-        
-          openButton.addEventListener("click", () => dialog.open = true);
-          closeButton.addEventListener("click", () => dialog.open = false);
-        </script>
-    </mdui-card>
-    <center>
-        <?php
-        echo '<div style="font-size: 150px;background-color: '.$uuu['color'].';width: 200px;height: 200px;border-radius: 10px;margin: 20px;text-align: center;display:flex;justify-content:center;align-items:center">' . $uuu['image'] . '</div>';
-        echo '<h2 style="font-size: 30px;margin: 20px;">'. $a . '-' . $uuu['name'] . '</h2>';
-        echo '<h2 style="font-size: 20px;margin: 20px;">' . $uuu['info'] . '</h2>';
-        ?>
-        <?php
-        echo "<div class='pages'>";
-        foreach (json_decode(file_get_contents('../json'),true) as $page){
-            if(isset($page['uid'])){
-                if($page['uid'] == $_GET['id']){
-                    echo ' <mdui-card clickable onclick="openlink('.$page['id'].');" variant = "outlined" class="page">
-                    <h1 style="font-size: 20px;">'.$page['title'].'</h1>
-                    <h2 style="font-size: 20px">'.$page['time'].'</h2>
-                    <h2 style="font-size: 20px">'.$page['read'].'阅读</h2>
-                    </mdui-card>
-                    ';
+        <button class="load-more" id="loadMoreButton" onclick="loadPosts()">加载更多</button>
+    </div>
+
+    <script>
+        // 模拟数据
+        const posts = [
+            <?php
+            foreach (json_decode(file_get_contents('../../json'),true) as $page){
+                if(isset($page['uid'])){
+                    if($page['uid'] == $_GET['id']){
+                        echo("{ title: '".$page['title']."', date: '".$page['time']."', views: '".$page['read']."', id: '".$page['id']."'},");
+                    }
                 }
             }
+            ?>
+            // 可以继续添加更多的文章
+        ];
+
+        let postIndex = 0;
+        const postsPerLoad = 3;  // 每次加载3篇文章
+
+        function loadPosts() {
+            const contentDiv = document.getElementById('content');
+            const loadingDiv = document.getElementById('loading');
+            const loadMoreButton = document.getElementById('loadMoreButton');
+
+            loadingDiv.style.display = 'block';  // 显示加载动画
+            loadMoreButton.disabled = true;  // 禁用按钮，防止重复点击
+
+            setTimeout(() => {
+                const postsToLoad = posts.slice(postIndex, postIndex + postsPerLoad);
+                postsToLoad.forEach(post => {
+                    const cardDiv = document.createElement('div');
+                    cardDiv.classList.add('card');
+                    cardDiv.innerHTML = `
+                        <h1>${post.title}</h1>
+                        <p>${post.date} | ${post.views}阅读</p>
+                        <a href="/read/?id=${post.id}">阅读全文</a>
+                    `;
+                    contentDiv.appendChild(cardDiv);
+                });
+
+                postIndex += postsPerLoad;
+                loadingDiv.style.display = 'none';  // 隐藏加载动画
+
+                // 如果还有更多文章，启用加载按钮
+                if (postIndex < posts.length) {
+                    loadMoreButton.disabled = false;
+                } else {
+                    loadMoreButton.textContent = '没有更多内容了';
+                    loadMoreButton.disabled = true;
+                }
+            }, 200);  // 模拟加载延迟
         }
-        echo "</div>";
-        ?>
-    </center>
+        loadPosts();
+    </script>
+
 </body>
 </html>

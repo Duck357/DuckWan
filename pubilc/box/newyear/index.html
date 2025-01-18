@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Countdown Celebration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #2c3e50, #2980b9);
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            overflow-y: auto;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+        .countdown {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .messages {
+            font-size: 1.5em;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 20px;
+        }
+        .n h3{
+            font-size: 1.7em;
+        }
+        .n {
+            margin: 10px;
+        }
+        .messages p {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            font-style: oblique;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .messages p.visible {
+            opacity: 1;
+        }
+        .messages p:nth-child(odd).visible {
+            transform: translateX(0);
+            animation: slideInFromLeft 1s forwards;
+        }
+        .messages p:nth-child(even).visible {
+            transform: translateX(0);
+            animation: slideInFromRight 1s forwards;
+        }
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInFromRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>2025快乐！</h1>
+    <div class="countdown" id="countdown"></div>
+    <div class="n">
+        <h3>欢欢喜喜蛇年到，千家万户笑盈盈；吉祥灯笼高高挂，喜庆祥和万事顺；杯中美酒频频敬，其乐融融笑开怀；真挚祝福时时发，深情厚谊暖你心；祝你蛇年交好运，日子舒爽享幸福!</h3>
+        <img src="https://image.linrol.cn/i/2024/12/31/ywbp5i.jpeg" style="width: 70%;max-width: 500px;">
+    </div>
+    <div class="messages" id="messages">
+        <p>all because of you —— 饶大<br>“都是因为你”</p>
+        <p>没有钟英越的日子没有人敢黄 —— 刘希然</p>
+        <p>Magnificent —— 饶大<br>“壮丽”</p>
+        <p>滚 —— 蔡明岍<br>“她说她最常说这句的啊”</p>
+        <p>Wooooooooooooow amazing —— 张鑫栎<br>“库克4k纯享4小时循环：https://****************”</p>
+        <p>I‘m fucking school —— 张鑫栎<br>“学校我***你*********”</p>
+        <p>Be the change you want to see —— 张鑫栎<br>“成为你想看到的变化”</p>
+        <p>Live without regrets —— 饶大<br>“活得毫无遗憾”</p>
+        <p>A glance back in the long river of time. —— 饶大<br>“回望时间长河中的一瞥”</p>
+        <p>Life is beautiful —— 张鑫栎<br>“生活是美丽的”</p>
+        <p>太可恶了 —— 饶大</p>
+        <p>stronger —— 夏怡程<br>“更强”</p>
+        <p>你吵到我的眼睛了！ —— 邓川</p>
+        <p>我的耳朵瞎了，眼睛聋了，头发被截肢了，给点钱吧 —— 杨峻霖</p>
+        <p>太邪恶了 —— 杨峻霖</p>
+        <p>那咋了 —— 杨峻霖</p>
+        <p>666，这个入是桂 —— 杨峻霖</p>
+        <p>impossible —— 饶大<br>“不可能的”</p>
+        <p>因为超自然现象 —— 饶大</p>
+        <p>burndown —— 饶大<br>“燃尽”</p>
+        <p>Why I should care about other people,they don’t care about me. —— 饶大<br>“为什么我应该关心别人，他们却不关心我。”</p>
+        <p>Unbelievable —— 饶大<br>“难以置信”</p>
+        <p>《班级第一人》 —— 黄晖杰<br>“我纯🦌人”</p>
+        <p>I miss home in the school —— 张鑫栎<br>“我在学校想念我的故乡”</p>
+        <p>没有刘希然的日子没有乐子 —— 钟英越</p>
+        <p>Stay strong —— 饶大<br>“保持坚强”</p>
+        <p>那年盛夏 —— 张鑫栎<br>“怎么混进来个莫名其妙的”</p>
+        <p>Love yourself first —— 张鑫栎<br>“首先爱自己”</p>
+        <p>Never give up —— 饶大<br>“永不放弃”</p>
+        <p>哪又咋了？ —— 李安琪</p>
+        <p>Medey medey medey —— 张鑫栎<br>“飞坤要炸了”</p>
+        <p>pull up pull up —— 张鑫栎<br>“抬升！抬升！”</p>
+        <p>Fantastic —— 张鑫栎<br>“极好”</p>
+        <p>Marvelous —— 张鑫栎<br>“奇妙”</p>
+        <p>搞你了吗？ —— 刘希然<br>“神经病”</p>
+        <p>The world is mine —— 饶大<br>“这个世界是我的”</p>
+        <p>Keep going, don't stop —— 张鑫栎<br>“继续前进，别停下”</p>
+        <p>Dream big, live bigger —— 饶大<br>“世界很大，生活更大”</p>
+        <p>No job’s too big,no pup’s too small. —— 饶大<br>“没有工作太大，没有小狗太小”</p>
+        <p>Every day is a new beginning —— 张鑫栎<br>“每一天都是新的开始”</p>
+
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('January 1, 2025 00:00:00');
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown').innerText = "跨年快乐！";
+                alert("2025快乐🎉！");
+                window.location.href="3.html";
+                clearInterval(interval);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = ((diff % (1000 * 60)) / 1000).toFixed(3);
+
+            document.getElementById('countdown').innerText = `距离2025还有: ${minutes}分钟 ${seconds}秒`;
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to avoid 1-second delay
+
+        // Lazy load messages
+        const messages = document.querySelectorAll('.messages p');
+        let messageIndex = 0;
+
+        function showNextMessage() {
+            if (messageIndex < messages.length) {
+                const message = messages[messageIndex];
+                const rect = message.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    message.classList.add('visible');
+                    messageIndex++;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', showNextMessage);
+        showNextMessage(); // Initial call to handle already visible messages
+    </script>
+</body>
+</html>

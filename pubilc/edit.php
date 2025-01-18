@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($id <= 0 || $read < 0) {
         $error = "无效的ID或阅读量";
     }else{
-        $data = json_decode(file_get_contents('./json'),true);
+        $data = json_decode(file_get_contents('../json'),true);
         $data[$id]['read'] = $read;
-        file_put_contents('./json',json_encode($data,JSON_UNESCAPED_UNICODE));
+        file_put_contents('../json',json_encode($data,JSON_UNESCAPED_UNICODE));
     }
 
     header('Location: root.php');

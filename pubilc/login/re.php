@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zn-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://duckwan.link/image/icon.ico" />
     <title>用户中心</title>
     <style>
         .per {
@@ -17,15 +18,14 @@
 </head>
 <body>
     <?php
-    $codearray = json_decode(file_get_contents("code"),true);
     $error = 0;
     $aaa = true;
     
     // 数据库配置信息
-    $servername = ""; // 数据库服务器地址
-    $username = ""; // 数据库用户名
-    $password = ""; // 数据库密码
-    $dbname = ""; // 数据库名称
+    $servername = "localhost"; // 数据库服务器地址
+    $username = "111"; // 数据库用户名
+    $password = "111"; // 数据库密码
+    $dbname = "111"; // 数据库名称
     
     // 创建连接
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -53,14 +53,16 @@
         $code = $conn->real_escape_string($code);
         $color = $conn->real_escape_string($color);
         $per = 3;
-        $g = 0;
-        if($code == "LDW1" || $code == "LDW2") $g = 15;
+        $g = 10;
         $json = '{"time": "'.date('Y.m.d').'","coin": {"gold": '.$g.'},"pages": []}';
         if($name != '' && $image != '' && $info != '' && strlen($info) <= 100){
             if(isset($password)){
-                if (!array_key_exists($code, $codearray)) {
-                    $error = 1; // 设置错误代码
-                } else {
+                $stmt = $conn->prepare("SELECT ucode FROM code WHERE ucode = ?");
+                $stmt->bind_param("s", $code); // 这里只需要两个参数
+                if ($stmt->execute()) $result = $stmt->get_result();
+                    if ($result->num_rows == 0) {
+                        $error = 1; // 设置错误代码
+                    } else {
                     // 使用预处理语句添加新用户
                     $stmt = $conn->prepare("SELECT name, password, image, info FROM user WHERE name = ? AND password = ?");
                     $stmt->bind_param("ss", $name, $password); // 这里只需要两个参数
@@ -69,20 +71,31 @@
                         if ($result->num_rows > 0) {
                             $error = 2;
                         } else {
-                            // 插入新用户
-                            $insertStmt = $conn->prepare("INSERT INTO user (name, password, image, info, per, color, json) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                            $insertStmt->bind_param("ssssiss", $name, $password, $image, $info, $per, $color, $json);
-                            if ($insertStmt->execute()) {
-                                $aaa = false;
-                                unset($codearray[$code]);
-                                echo "<center><h1>普通用户 ".$name." 注册成功!</h1>";
-                                echo "<h1>请记住您的密码 ".$password."</h1>";
-                                echo "<h1>返回 <a href='index.php'>登录页面</a></h1></center>";
-                                file_put_contents("code",json_encode($codearray));
+                            // 假设 $code 是要删除的记录的条件
+                            $sql = "DELETE FROM code WHERE ucode = ?";
+                            
+                            // 使用 prepared statement
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param("s", $code); // "s" 表示 $code 是一个字符串类型的参数
+                            
+                            if ($stmt->execute()) {
+                                // 插入新用户
+                                $insertStmt = $conn->prepare("INSERT INTO user (name, password, image, info, per, color, json) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                                $insertStmt->bind_param("ssssiss", $name, $password, $image, $info, $per, $color, $json);
+                                if ($insertStmt->execute()) {
+                                    $aaa = false;
+    
+                                    echo "<center><h1>普通用户 ".$name." 注册成功!</h1>";
+                                    echo "<h1>请记住您的密码 ".$password."</h1>";
+                                    echo "<h1>返回 <a href='index.php'>登录页面</a></h1></center>";
+                                    
+                                } else {
+                                    echo "Error: 服务器出现问题稍后再尝试吧";
+                                }
+                                $insertStmt->close();
                             } else {
-                                echo "Error: 111";
+                                echo "错误: " . $sql . "<br>" . $conn->error;
                             }
-                            $insertStmt->close();
                         }
                     } else {
                         echo "Error: 222";
@@ -118,7 +131,7 @@
             <h2>简介</h2>
             <textarea type="text" name="info" maxlength="100"></textarea>
             <h2>注册码</h2>
-            <h3>前往<a href="/buy/index.php">购买</a>,或者联系我wx获取(不收费)</h3>
+            <h3>前往<a href="https://shop.20130715.xyz">购买</a>,或者联系我wx获取(不收费)</h3>
             <input type="text" name="code">
             <br>
             <input type="submit" value="提交" name="submit">

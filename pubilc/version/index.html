@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PopBird的网站开发列表</title>
+    <style>
+        html {
+            width: 100vw;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .card-container {
+            width: 90vw;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap:wrap;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 20px;
+            width: 200px;
+            max-height: 20%;
+            text-align: center;
+            cursor: pointer;
+        }
+        .card img {
+            width: 30%;
+            border-radius: 4px;
+        }
+        .card h3 {
+            margin: 10px 0;
+        }
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+        #introduction {
+            margin-top: 20px;
+        }
+        .introduction-section {
+            display: none;
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .introduction-section.active {
+            display: block;
+        }
+        .introduction-section h2 {
+            margin-bottom: 10px;
+        }
+        .introduction-section p {
+            font-size: 16px;
+            color: #333;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 25px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            height: 20px;
+            width: 0;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            border-radius: 25px;
+        }
+        .bu {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .bu:hover {
+            background-color: #0056b3;
+        }
+
+        .bu:active {
+            transform: scale(0.95);
+            background-color: #004080;
+        }
+        t {
+            text-decoration:line-through;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card" onclick="showIntroduction('website1');go('website1')">
+            <img src="https://s21.ax1x.com/2024/11/28/pA5lGyd.png" alt="Website 1">
+            <h3>DuckWan 鸭玩</h3>
+            <p>自建游戏分享网站</p>
+            <p><strong>DuckWan 分享 交流 探索</strong></p>
+        </div>
+        <div class="card" onclick="showIntroduction('website2');go('website2')">
+            <img src="https://s21.ax1x.com/2024/11/28/pA511A0.png" alt="Website 2">
+            <h3>Duck520</h3>
+            <p>记录你生活的美好时刻</p>
+        </div>
+        <div class="card" onclick="showIntroduction('website3');go('website3')">
+            <img src="https://s21.ax1x.com/2024/11/28/pA51fHI.md.png" alt="Website 3">
+            <h3>DuckAI</h3>
+            <p>聚合AI平台</p>
+        </div>
+        <div class="card" onclick="showIntroduction('website4');go('website4')">
+            <img src="https://www.helloimg.com/i/2024/11/29/6749967adee39.png" alt="Website 4">
+            <h3>We Duck</h3>
+            <p>建设中在线论坛</p>
+        </div>
+    </div>
+
+    <div id="introduction">
+        <div id="website1" class="introduction-section">
+            <h2>DuckWan</h2>
+            <p>游戏在线交流分享</p>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 100%;">100%</div>
+            </div>
+            <ul>
+                <li>
+                    <p>计划开发：</p>
+                    <ol>
+                        <li>更换存储方式为MongoDB</li>
+                        <li>制作评论功能</li>
+                        <li>文件下载使用token加密</li>
+                    </ol>
+                </li><br>
+                <li>
+                    <p>进行中：</p>
+                    <ol>
+                        <li><t>用户uid为-1时查看用户主页会报错</t><progress value="100" max="100"></progress></li>
+                        <li><t>发布页面主页按钮被替换</t><progress value="100" max="100"></progress></li>
+                        <li><t>阅读界面主页按钮被替换</t><progress value="100" max="100"></progress></li>
+                        <li><t>用户更换、头像、背景、昵称、密码</t><progress value="100" max="100"></progress></li>
+                        <li>申请支付宝和微信接口（被拒绝了😭）<br><progress value="0" max="100"></progress></li>
+                    </ol>
+                </li><br>
+                <li>
+                    <p>BUG：</p>
+                    <ol>
+                        <li><t>用户uid为-1时查看用户主页会报错</t></li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div id="website2" class="introduction-section">
+            <h2>Duck520</h2>
+            <p>瀑布式推流论坛网站，基于开源项目修改</p>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 70%;">70%</div>
+            </div>
+            <ul>
+                <li>
+                    <p>BUG：</p>
+                    <ol>
+                        <li>用户查看自己发布文章时文字显示错误</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div id="website3" class="introduction-section">
+            <h2>DuckAI</h2>
+            <p>聚合式AI平台</p>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 90%;">90%</div>
+            </div>
+            <ul>
+                <li>
+                    <p>计划开发：</p>
+                    <ol>
+                        <li>用戶功能</li>
+                        <li>接入GPT3.5 、 GPT4.0 mini</li>
+                        <li>加密传输</li>
+                    </ol>
+                </li><br>
+                <li>
+                    <p>进行中：</p>
+                    <ol>
+                        <li>接入GPT3.5<br><progress value="24" max="100"></progress></li>
+                        <li>用户功能制作<br><progress value="0" max="100"></progress></li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div id="website4" class="introduction-section">
+            <h2>WeDuck</h2>
+            <p>在线交流论坛，暂不开放</p>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 15%;">15%</div>
+            </div>
+            <ul>
+                <li>
+                    <p>进行中：</p>
+                    <ol>
+                        <li>邮件SMTP接入<br><progress value="95" max="100"></progress></li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showIntroduction(websiteId) {
+            var sections = document.querySelectorAll('.introduction-section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            document.getElementById(websiteId).classList.add('active');
+        }
+        function go(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                return;
+            }
+            element.scrollIntoView({
+                behavior: 'smooth', 
+                block: 'center',
+                inline: 'center'
+            });
+        }
+    </script>
+</body>
+</html>
